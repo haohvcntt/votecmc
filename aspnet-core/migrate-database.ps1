@@ -1,0 +1,1 @@
+dotnet run --project CMCUVote --migrate-database

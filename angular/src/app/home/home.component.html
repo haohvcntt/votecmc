@@ -1,0 +1,11 @@
+<div>
+  <h1>BÌNH CHỌN CUỘC THI MISS-CMCU | HOA KHÔI TRƯỜNG ĐẠI HỌC CMC</h1>
+  <p>Chào mừng bạn đếnv với cuộc thi hoa khôi của trường Đại học CMC. Mỗi người chỉ được Vote 3 thí sinh.</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-12" *ngFor="let candidate of voteCandidates">
+          <app-candidate-card [candidate]="candidate"></app-candidate-card>
+      </div>
+    </div>
+  </div>
+</div>

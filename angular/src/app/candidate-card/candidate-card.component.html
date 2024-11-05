@@ -1,0 +1,12 @@
+<div class="card" style="width: 18rem">
+  <div class="image-container">
+    <img src="/assets/images/imgs.jpg" class="card-img-top" />
+  </div>
+  <div class="content">
+    <h3>{{ candidate.fullName }}</h3>
+    <p>Chức vụ: {{ candidate.department }}</p>
+    <p>Đơn vị công tác: {{ candidate.department }}</p>
+    <p>Sở thích: Đọc sách, viết văn, làm thơ</p>
+  </div>
+  <button class="vote-button" (click)="onVote()">Vote</button>
+</div>
