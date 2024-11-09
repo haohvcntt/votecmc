@@ -873,6 +873,91 @@
       "rootPath": "app",
       "remoteServiceName": "Default",
       "controllers": {
+        "CMCUVote.Services.FileHandleAppService": {
+          "controllerName": "FileHandle",
+          "controllerGroupName": "FileHandle",
+          "isRemoteService": true,
+          "isIntegrationService": false,
+          "apiVersion": null,
+          "type": "CMCUVote.Services.FileHandleAppService",
+          "interfaces": [],
+          "actions": {
+            "UploadFileByFile": {
+              "uniqueName": "UploadFileByFile",
+              "name": "UploadFile",
+              "httpMethod": "POST",
+              "url": "api/app/file-handle/upload-file",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "file",
+                  "typeAsString": "Volo.Abp.Content.IRemoteStreamContent, Volo.Abp.Core",
+                  "type": "Volo.Abp.Content.IRemoteStreamContent",
+                  "typeSimple": "Volo.Abp.Content.IRemoteStreamContent",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "file",
+                  "name": "file",
+                  "jsonName": null,
+                  "type": "Volo.Abp.Content.IRemoteStreamContent",
+                  "typeSimple": "Volo.Abp.Content.IRemoteStreamContent",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "FormFile",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.String",
+                "typeSimple": "string"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "CMCUVote.Services.FileHandleAppService"
+            },
+            "DownloadFileByFileName": {
+              "uniqueName": "DownloadFileByFileName",
+              "name": "DownloadFile",
+              "httpMethod": "POST",
+              "url": "api/app/file-handle/download-file",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "fileName",
+                  "typeAsString": "System.String, System.Private.CoreLib",
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "fileName",
+                  "name": "fileName",
+                  "jsonName": null,
+                  "type": "System.String",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "Volo.Abp.Content.IRemoteStreamContent",
+                "typeSimple": "Volo.Abp.Content.IRemoteStreamContent"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "CMCUVote.Services.FileHandleAppService"
+            }
+          }
+        },
         "CMCUVote.Services.VoteCandidates.VoteCandidateAppService": {
           "controllerName": "VoteCandidate",
           "controllerGroupName": "VoteCandidate",
@@ -882,6 +967,100 @@
           "type": "CMCUVote.Services.VoteCandidates.VoteCandidateAppService",
           "interfaces": [],
           "actions": {
+            "CreateAsyncByInput": {
+              "uniqueName": "CreateAsyncByInput",
+              "name": "CreateAsync",
+              "httpMethod": "POST",
+              "url": "api/app/vote-candidate",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "CMCUVote.Services.Dtos.VoteCandidateDto, CMCUVote",
+                  "type": "CMCUVote.Services.Dtos.VoteCandidateDto",
+                  "typeSimple": "CMCUVote.Services.Dtos.VoteCandidateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "CMCUVote.Services.Dtos.VoteCandidateDto",
+                  "typeSimple": "CMCUVote.Services.Dtos.VoteCandidateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Guid",
+                "typeSimple": "string"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "CMCUVote.Services.VoteCandidates.VoteCandidateAppService"
+            },
+            "UpdateAsyncByIdAndInput": {
+              "uniqueName": "UpdateAsyncByIdAndInput",
+              "name": "UpdateAsync",
+              "httpMethod": "PUT",
+              "url": "api/app/vote-candidate",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "Id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "input",
+                  "typeAsString": "CMCUVote.Services.Dtos.VoteCandidateDto, CMCUVote",
+                  "type": "CMCUVote.Services.Dtos.VoteCandidateDto",
+                  "typeSimple": "CMCUVote.Services.Dtos.VoteCandidateDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "Id",
+                  "name": "Id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "CMCUVote.Services.Dtos.VoteCandidateDto",
+                  "typeSimple": "CMCUVote.Services.Dtos.VoteCandidateDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "CMCUVote.Services.VoteCandidates.VoteCandidateAppService"
+            },
             "GetListAsync": {
               "uniqueName": "GetListAsync",
               "name": "GetListAsync",
@@ -893,6 +1072,323 @@
               "returnValue": {
                 "type": "System.Collections.Generic.List<CMCUVote.Services.Dtos.VoteCandidateDto>",
                 "typeSimple": "[CMCUVote.Services.Dtos.VoteCandidateDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "CMCUVote.Services.VoteCandidates.VoteCandidateAppService"
+            },
+            "SaveFileOfCandidateByInput": {
+              "uniqueName": "SaveFileOfCandidateByInput",
+              "name": "SaveFileOfCandidate",
+              "httpMethod": "POST",
+              "url": "api/app/vote-candidate/save-file-of-candidate",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "CMCUVote.Services.Dtos.CandidateFileDto, CMCUVote",
+                  "type": "CMCUVote.Services.Dtos.CandidateFileDto",
+                  "typeSimple": "CMCUVote.Services.Dtos.CandidateFileDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "CMCUVote.Services.Dtos.CandidateFileDto",
+                  "typeSimple": "CMCUVote.Services.Dtos.CandidateFileDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Void",
+                "typeSimple": "System.Void"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "CMCUVote.Services.VoteCandidates.VoteCandidateAppService"
+            },
+            "RemoveCandidateById": {
+              "uniqueName": "RemoveCandidateById",
+              "name": "RemoveCandidate",
+              "httpMethod": "DELETE",
+              "url": "api/app/vote-candidate/{id}/candidate",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "id",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "id",
+                  "name": "id",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Guid",
+                "typeSimple": "string"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "CMCUVote.Services.VoteCandidates.VoteCandidateAppService"
+            },
+            "VoteCandidateCheckByTypeAndCandidateIdAndUserId": {
+              "uniqueName": "VoteCandidateCheckByTypeAndCandidateIdAndUserId",
+              "name": "VoteCandidateCheck",
+              "httpMethod": "POST",
+              "url": "api/app/vote-candidate/vote-candidate-check",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "type",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "candidateId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "userId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "type",
+                  "name": "type",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "candidateId",
+                  "name": "candidateId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "userId",
+                  "name": "userId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Int32",
+                "typeSimple": "number"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "CMCUVote.Services.VoteCandidates.VoteCandidateAppService"
+            },
+            "UnVoteByTypeAndCandidateIdAndUserId": {
+              "uniqueName": "UnVoteByTypeAndCandidateIdAndUserId",
+              "name": "UnVote",
+              "httpMethod": "POST",
+              "url": "api/app/vote-candidate/un-vote",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "type",
+                  "typeAsString": "System.Int32, System.Private.CoreLib",
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "candidateId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                },
+                {
+                  "name": "userId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "type",
+                  "name": "type",
+                  "jsonName": null,
+                  "type": "System.Int32",
+                  "typeSimple": "number",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "candidateId",
+                  "name": "candidateId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                },
+                {
+                  "nameOnMethod": "userId",
+                  "name": "userId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "ModelBinding",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Int32",
+                "typeSimple": "number"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "CMCUVote.Services.VoteCandidates.VoteCandidateAppService"
+            },
+            "GetListVotedByUserId": {
+              "uniqueName": "GetListVotedByUserId",
+              "name": "GetListVoted",
+              "httpMethod": "GET",
+              "url": "api/app/vote-candidate/voted/{userId}",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "userId",
+                  "typeAsString": "System.Guid, System.Private.CoreLib",
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "userId",
+                  "name": "userId",
+                  "jsonName": null,
+                  "type": "System.Guid",
+                  "typeSimple": "string",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": [],
+                  "bindingSourceId": "Path",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<CMCUVote.Services.Dtos.CandidateVoteInfo>",
+                "typeSimple": "[CMCUVote.Services.Dtos.CandidateVoteInfo]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "CMCUVote.Services.VoteCandidates.VoteCandidateAppService"
+            },
+            "GetStastic": {
+              "uniqueName": "GetStastic",
+              "name": "GetStastic",
+              "httpMethod": "GET",
+              "url": "api/app/vote-candidate/stastic",
+              "supportedVersions": [],
+              "parametersOnMethod": [],
+              "parameters": [],
+              "returnValue": {
+                "type": "System.Collections.Generic.List<CMCUVote.Services.Dtos.VoteCountDto>",
+                "typeSimple": "[CMCUVote.Services.Dtos.VoteCountDto]"
+              },
+              "allowAnonymous": null,
+              "implementFrom": "CMCUVote.Services.VoteCandidates.VoteCandidateAppService"
+            },
+            "UpdateWinerStatusByInput": {
+              "uniqueName": "UpdateWinerStatusByInput",
+              "name": "UpdateWinerStatus",
+              "httpMethod": "PUT",
+              "url": "api/app/vote-candidate/winer-status",
+              "supportedVersions": [],
+              "parametersOnMethod": [
+                {
+                  "name": "input",
+                  "typeAsString": "CMCUVote.Services.Dtos.VoteCountDto, CMCUVote",
+                  "type": "CMCUVote.Services.Dtos.VoteCountDto",
+                  "typeSimple": "CMCUVote.Services.Dtos.VoteCountDto",
+                  "isOptional": false,
+                  "defaultValue": null
+                }
+              ],
+              "parameters": [
+                {
+                  "nameOnMethod": "input",
+                  "name": "input",
+                  "jsonName": null,
+                  "type": "CMCUVote.Services.Dtos.VoteCountDto",
+                  "typeSimple": "CMCUVote.Services.Dtos.VoteCountDto",
+                  "isOptional": false,
+                  "defaultValue": null,
+                  "constraintTypes": null,
+                  "bindingSourceId": "Body",
+                  "descriptorName": ""
+                }
+              ],
+              "returnValue": {
+                "type": "System.Int32",
+                "typeSimple": "number"
               },
               "allowAnonymous": null,
               "implementFrom": "CMCUVote.Services.VoteCandidates.VoteCandidateAppService"
@@ -3544,6 +4040,108 @@
     }
   },
   "types": {
+    "CMCUVote.Services.Dtos.CandidateFileDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "VoteCandidateId",
+          "jsonName": null,
+          "type": "System.Guid?",
+          "typeSimple": "string?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "FileName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "FilePath",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "CMCUVote.Services.Dtos.CandidateVoteInfo": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "CandidateId",
+          "jsonName": null,
+          "type": "System.Guid?",
+          "typeSimple": "string?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CandidateName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "TypeName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Type",
+          "jsonName": null,
+          "type": "System.Int32?",
+          "typeSimple": "number?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
     "CMCUVote.Services.Dtos.VoteCandidateDto": {
       "baseType": null,
       "isEnum": false,
@@ -3592,6 +4190,99 @@
           "jsonName": null,
           "type": "System.String",
           "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Files",
+          "jsonName": null,
+          "type": "[CMCUVote.Services.Dtos.CandidateFileDto]",
+          "typeSimple": "[CMCUVote.Services.Dtos.CandidateFileDto]",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "CMCUVote.Services.Dtos.VoteCountDto": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "CandidateId",
+          "jsonName": null,
+          "type": "System.Guid?",
+          "typeSimple": "string?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "CandidateName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "VoteCount",
+          "jsonName": null,
+          "type": "System.Int32?",
+          "typeSimple": "number?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "Type",
+          "jsonName": null,
+          "type": "System.Int32?",
+          "typeSimple": "number?",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "TypeName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "IsWinner",
+          "jsonName": null,
+          "type": "System.Boolean?",
+          "typeSimple": "boolean?",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,
@@ -6194,6 +6885,51 @@
           "jsonName": null,
           "type": "System.Boolean",
           "typeSimple": "boolean",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        }
+      ]
+    },
+    "Volo.Abp.Content.IRemoteStreamContent": {
+      "baseType": null,
+      "isEnum": false,
+      "enumNames": null,
+      "enumValues": null,
+      "genericArguments": null,
+      "properties": [
+        {
+          "name": "FileName",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ContentType",
+          "jsonName": null,
+          "type": "System.String",
+          "typeSimple": "string",
+          "isRequired": false,
+          "minLength": null,
+          "maxLength": null,
+          "minimum": null,
+          "maximum": null,
+          "regex": null
+        },
+        {
+          "name": "ContentLength",
+          "jsonName": null,
+          "type": "System.Int64?",
+          "typeSimple": "number?",
           "isRequired": false,
           "minLength": null,
           "maxLength": null,

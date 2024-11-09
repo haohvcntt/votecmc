@@ -1,6 +1,6 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'https://vote.cmc-u.edu.vn';
 
 export const environment = {
   production: true,
@@ -10,8 +10,8 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44344/',
-    redirectUri: baseUrl,
+    issuer: 'https://api-vote.cmc-u.edu.vn/',
+    redirectUri: 'https://vote.cmc-u.edu.vn',
     clientId: 'CMCUVote_App',
     responseType: 'code',
     scope: 'offline_access CMCUVote',
@@ -19,7 +19,7 @@ export const environment = {
   },
   apis: {
     default: {
-      url: 'https://localhost:44344',
+      url: 'https://api-vote.cmc-u.edu.vn',
       rootNamespace: 'CMCUVote',
     },
   },

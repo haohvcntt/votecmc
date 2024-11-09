@@ -15,7 +15,7 @@ export const environment = {
     clientId: 'CMCUVote_App',
     responseType: 'code',
     scope: 'offline_access CMCUVote',
-    requireHttps: true,
+    requireHttps: false,
   },
   apis: {
     default: {

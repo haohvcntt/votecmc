@@ -1,6 +1,6 @@
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic.Bundling;
 using Volo.Abp.AspNetCore.Mvc.UI.Theme.Basic;
-﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -50,6 +50,10 @@ using Volo.Abp.Security.Claims;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.Validation.Localization;
 using Volo.Abp.VirtualFileSystem;
+using static OpenIddict.Abstractions.OpenIddictConstants;
+using OpenIddict.Abstractions;
+using OpenIddict.Core;
+using Volo.Abp.OpenIddict.Applications;
 
 namespace CMCUVote;
 
@@ -136,10 +140,63 @@ public class CMCUVoteModule : AbpModule
 
             PreConfigure<OpenIddictServerBuilder>(serverBuilder =>
             {
-                serverBuilder.AddProductionEncryptionAndSigningCertificate("openiddict.pfx", "176c3a6c-8e97-4a0f-ba9b-1d32590f7de6");
+                var certPath = Environment.GetEnvironmentVariable("OPENIDDICT_CERTIFICATE_PATH") ?? @"C:\inetpub\wwwroot\certificates\openiddict.pfx";
+                var certPassword = Environment.GetEnvironmentVariable("OPENIDDICT_CERTIFICATE_PASS") ?? "1b624da6-c8c3-4877-ae32-65c3c50c512c";
+                serverBuilder.AddProductionEncryptionAndSigningCertificate(certPath, certPassword);
+            });
+
+            PreConfigure<OpenIddictBuilder>(builder =>
+            {
+                builder.AddServer(options =>
+                {
+                    options.SetIssuer(new Uri("https://api-vote.cmc-u.edu.vn")); // Đặt URL issuer
+
+                    // Các endpoint cần thiết
+                    options.SetAuthorizationEndpointUris("/connect/authorize")
+                           .SetTokenEndpointUris("/connect/token")
+                           .SetLogoutEndpointUris("/connect/logout");
+
+                    // Kích hoạt các luồng xác thực
+                    options.AllowAuthorizationCodeFlow()
+                           .AllowRefreshTokenFlow();
+
+                    // Đăng ký scopes
+                    options.RegisterScopes("offline_access", "profile", "email", "CMCUVote");
+
+                    // Cấu hình ASP.NET Core
+                    options.UseAspNetCore()
+                           .EnableAuthorizationEndpointPassthrough()
+                           .EnableTokenEndpointPassthrough()
+                           .EnableLogoutEndpointPassthrough();
+                });
+            });
+
+            // Angular
+            PreConfigure<OpenIddictApplicationManager<OpenIddictApplication>>(manager =>
+            {
+                if (manager.FindByClientIdAsync("CMCUVote_App").Result == null)
+                {
+                    manager.CreateAsync(new OpenIddictApplicationDescriptor
+                    {
+                        ClientId = "CMCUVote_App",
+                        DisplayName = "CMCUVote Angular Client",
+                        RedirectUris = { new Uri("https://vote.cmc-u.edu.vn") },
+                        PostLogoutRedirectUris = { new Uri("https://vote.cmc-u.edu.vn") },
+                        Permissions =
+            {
+                OpenIddictConstants.Permissions.Endpoints.Authorization,
+                OpenIddictConstants.Permissions.Endpoints.Token,
+                OpenIddictConstants.Permissions.GrantTypes.AuthorizationCode,
+                OpenIddictConstants.Permissions.GrantTypes.RefreshToken,
+                OpenIddictConstants.Permissions.ResponseTypes.Code,
+                //OpenIddictConstants.Permissions.Scopes.OfflineAccess,
+                OpenIddictConstants.Permissions.Scopes.Profile
+            }
+                    });
+                }
             });
         }
-        
+
         CMCUVoteGlobalFeatureConfigurator.Configure();
         CMCUVoteModuleExtensionConfigurator.Configure();
         CMCUVoteEfCoreEntityExtensionMappings.Configure();
@@ -221,25 +278,25 @@ public class CMCUVoteModule : AbpModule
             options.DefaultResourceType = typeof(CMCUVoteResource);
 
             options.Languages.Add(new LanguageInfo("en", "en", "English"));
-            options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
-            options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
-            options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
-            options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
-            options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
-            options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
-            options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
-            options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi"));
-            options.Languages.Add(new LanguageInfo("is", "is", "Icelandic"));
-            options.Languages.Add(new LanguageInfo("it", "it", "Italiano"));
-            options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
-            options.Languages.Add(new LanguageInfo("ro-RO", "ro-RO", "Română"));
-            options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
-            options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak"));
-            options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
-            options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
-            options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch"));
-            options.Languages.Add(new LanguageInfo("es", "es", "Español"));
-            options.Languages.Add(new LanguageInfo("el", "el", "Ελληνικά"));
+            //options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
+            //options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
+            //options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
+            //options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
+            //options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
+            //options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
+            //options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
+            //options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi"));
+            //options.Languages.Add(new LanguageInfo("is", "is", "Icelandic"));
+            //options.Languages.Add(new LanguageInfo("it", "it", "Italiano"));
+            //options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
+            //options.Languages.Add(new LanguageInfo("ro-RO", "ro-RO", "Română"));
+            //options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
+            //options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak"));
+            //options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
+            //options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
+            //options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch"));
+            //options.Languages.Add(new LanguageInfo("es", "es", "Español"));
+            //options.Languages.Add(new LanguageInfo("el", "el", "Ελληνικά"));
         });
 
         Configure<AbpExceptionLocalizationOptions>(options =>
@@ -361,7 +418,10 @@ public class CMCUVoteModule : AbpModule
         if (!env.IsDevelopment())
         {
             app.UseErrorPage();
+            app.UseHsts();
         }
+
+        app.UseHttpsRedirection();
 
         app.UseCorrelationId();
         app.UseStaticFiles();

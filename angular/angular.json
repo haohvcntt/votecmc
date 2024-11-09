@@ -30,6 +30,9 @@
             "allowedCommonJsDependencies": ["chart.js", "js-sha256"],
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/saga-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
               {
                 "input": "node_modules/bootstrap/dist/css/bootstrap.rtl.min.css",
                 "inject": false,

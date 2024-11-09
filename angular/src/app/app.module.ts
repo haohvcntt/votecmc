@@ -20,6 +20,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { APP_ROUTE_PROVIDER } from './route.provider';
 import { ThemeBasicModule } from '@abp/ng.theme.basic';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -28,9 +33,14 @@ import { ThemeBasicModule } from '@abp/ng.theme.basic';
     AppRoutingModule,
     CoreModule,
     ThemeSharedModule,
-    
     InternetConnectionStatusComponent,
-          ThemeBasicModule.forRoot(),
+    ThemeBasicModule.forRoot(),
+    FormsModule,
+    
+    ButtonModule,
+    TableModule,
+    InputTextModule,
+    FloatLabelModule
   ],
   declarations: [AppComponent],
   providers: [

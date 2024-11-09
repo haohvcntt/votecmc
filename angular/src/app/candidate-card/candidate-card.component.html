@@ -1,12 +1,36 @@
-<div class="card" style="width: 18rem">
-  <div class="image-container">
-    <img src="/assets/images/imgs.jpg" class="card-img-top" />
+<div class="card mb-3 mx-auto" style="width: 18rem; text-align: center">
+  <img
+    class="card-img-top"
+    src="{{ candidate.files[0].filePath }}"
+    class="card-img-top"
+    alt="Card image cap"
+  />
+  <div class="card-body">
+    <div style="height: 80px">
+      <h5 class="card-title">{{ candidate.fullName }}</h5>
+      <p class="card-text">{{ candidate.note }}</p>
+    </div>
   </div>
-  <div class="content">
-    <h3>{{ candidate.fullName }}</h3>
-    <p>Chức vụ: {{ candidate.department }}</p>
-    <p>Đơn vị công tác: {{ candidate.department }}</p>
-    <p>Sở thích: Đọc sách, viết văn, làm thơ</p>
+  <div class="flex gap-3 mt-1" style="font-size: 10px;">
+    <button class="btn btn-secondary w-100 no-radius" (click)="onVote(1, candidate.id)">
+      <span>Mr. Fashion Icon</span><br />
+      <span>Anh Tài Sành Điệu</span>
+    </button>
+    <button class="btn btn-secondary w-100 no-radius" (click)="onVote(2, candidate.id)">
+      <span>Mr. Ginger Salt</span><br />
+      <span>Anh Tài Mứt Gừng</span>
+    </button>
+    <button class="btn btn-secondary w-100 no-radius" (click)="onVote(3, candidate.id)">
+      <span>Mr. King of Memes</span><br />
+      <span>Anh Tài Hài Hước</span>
+    </button>
+    <button class="btn btn-secondary w-100 no-radius" (click)="onVote(4, candidate.id)">
+      <span>Mr. Problem Solver</span><br />
+      <span>Anh Tài Chu Đáo</span>
+    </button>
+    <button class="btn btn-secondary w-100 no-radius" (click)="onVote(5, candidate.id)">
+      <span>Mr. Tech Genius</span><br />
+      <span>Anh Tài Công Nghệ</span>
+    </button>
   </div>
-  <button class="vote-button" (click)="onVote()">Vote</button>
 </div>

@@ -15,6 +15,9 @@ namespace CMCUVote.Data;
 public class CMCUVoteDbContext : AbpDbContext<CMCUVoteDbContext>
 {
     public DbSet<VoteCandidate> VoteCandidates { get; set; }
+    public DbSet<Criteria> Criterias { get; set; }
+    public DbSet<VoteInfo> VoteInfos { get; set; }
+    public DbSet<CandidateFile> CandidateFiles { get; set; }
 
     public CMCUVoteDbContext(DbContextOptions<CMCUVoteDbContext> options)
         : base(options)
@@ -24,7 +27,7 @@ public class CMCUVoteDbContext : AbpDbContext<CMCUVoteDbContext>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        
+
 
         /* Include modules to your migration db context */
 
@@ -41,6 +44,19 @@ public class CMCUVoteDbContext : AbpDbContext<CMCUVoteDbContext>
         builder.Entity<VoteCandidate>(b =>
         {
             b.ToTable("VoteCandidates");
+        });
+        builder.Entity<Criteria>(b =>
+        {
+            b.ToTable("Criterias");
+        });
+        builder.Entity<VoteInfo>(b =>
+        {
+            b.ToTable("VoteInfos");
+        });
+        
+        builder.Entity<CandidateFile>(b =>
+        {
+            b.ToTable("CandidateFiles");
         });
     }
 }

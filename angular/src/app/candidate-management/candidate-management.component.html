@@ -1,0 +1,77 @@
+<div class="row">
+  <div class="col-12 col-md-8 col-lg-8">
+    <p-table [value]="candidates" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 20%;">Tên</th>
+          <th style="width: 20%;">Ghi chú</th>
+          <th style="width: 50%;">Hình ảnh</th>
+          <th style="width: 10%;"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-candidate>
+        <tr>
+          <td>{{ candidate.fullName }}</td>
+          <td>{{ candidate.note }}</td>
+          <td>
+            <img style="width: 100%;" *ngIf="candidate.files.length > 0" [src]="candidate.files[0].filePath" alt="Candidate File" width="100">
+          </td>
+          <td>
+            <p-button type="button" (onClick)="removeCandidate(candidate.id)">Xóa</p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <div class="col-12 col-md-4 col-lg-4">
+    <form class="card">
+      <div style="padding: 10px">
+        <h5>Thông tin ứng viên</h5>
+        <div class="p-fluid">
+          <div class="p-field">
+            <label for="name">Họ tên</label>
+            <input
+              pInputText
+              id="name"
+              aria-describedby="username-help"
+              [(ngModel)]="candidate.fullName"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <div class="p-field">
+            <label for="note">Ghi chú</label>
+            <input
+              pInputText
+              id="note"
+              aria-describedby="username-help"
+              [(ngModel)]="candidate.note"
+              [ngModelOptions]="{ standalone: true }"
+            />
+          </div>
+          <div class="p-field">
+            <label for="image">Hình ảnh</label>
+            <input
+              (change)="this.onFilechange($event)"
+              class="form-control"
+              type="file"
+              id="formFile"
+            />
+          </div>
+          <div class="p-field">
+            <div class="d-flex align-items-center">
+              <p-button
+                class="mt-2"
+                label="Lưu"
+                severity="info"
+                type="button"
+                (onClick)="save()"
+              ></p-button>
+              <p-button class="mt-2" label="Hủy bỏ" severity="secondary" type="button"></p-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="list-result">
+  <div *ngFor="let candidate of votes" class="card mb-3 mx-auto" style="width: 18rem; text-align: center">
+    <h3>Người đạt giải {{ candidate.typeName}} </h3>
+    <img
+      class="card-img-top"
+      src="{{ candidateImages[candidate.candidateId] }}"
+      class="card-img-top"
+      alt="Card image cap"
+    />
+    <div class="card-body">
+      <div style="height: 80px">
+        <h5 class="card-title">{{ candidate.candidateName }}</h5>
+      </div>
+    </div>
+  </div>
+</div>

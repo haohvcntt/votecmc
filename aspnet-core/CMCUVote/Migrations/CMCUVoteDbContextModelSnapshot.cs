@@ -24,6 +24,41 @@ namespace CMCUVote.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CMCUVote.Entities.CandidateFile", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("VoteCandidateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CandidateFiles", (string)null);
+                });
+
+            modelBuilder.Entity("CMCUVote.Entities.Criteria", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Criterias", (string)null);
+                });
+
             modelBuilder.Entity("CMCUVote.Entities.VoteCandidate", b =>
                 {
                     b.Property<Guid>("Id")
@@ -44,6 +79,31 @@ namespace CMCUVote.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("VoteCandidates", (string)null);
+                });
+
+            modelBuilder.Entity("CMCUVote.Entities.VoteInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CriteriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool?>("IsWinner")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("VoteCandidateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("VoteInfos", (string)null);
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

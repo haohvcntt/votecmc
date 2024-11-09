@@ -43,4 +43,14 @@
   .vote-button:hover {
     background-color: #0056b3;
   }
+  .custom-button {
+    width: 100%; /* Ensure the button takes full width */
+  }
   
+  .p-button {
+    display: block; /* Allow the button to stretch */
+  }
+
+  .no-radius {
+    border-radius: 0; /* Removes the border radius */
+  }
