@@ -59,25 +59,42 @@ namespace CMCUVote.Services.VoteCandidates
 
         public async Task<List<VoteCandidateDto>> GetListAsync()
         {
+            List<string> records =
+            [
+                "Ban Đại học số",
+                "Ban Lãnh đạo",
+                "Khoa Công nghệ thông tin và Truyền thông",
+                "Phòng Công tác sinh viên",
+                "Ban Đại học số",
+                "Phòng Tuyển sinh",
+                "Ban Lãnh đạo"
+            ];
+
             var items = await _voteCandidateRepository.GetListAsync();
             var candidateIds = items.Select(s => s.Id).ToList();
             var files = await _candidateFileRepository.GetListAsync(w => candidateIds.Contains((Guid)w.VoteCandidateId));
 
-            var result = items.Select(s => new VoteCandidateDto
-            {
-                Id = s.Id,
-                FullName = s.FullName,
-                Department = s.Department,
-                Note = s.Note,
-                Files = files.Where(f => f.VoteCandidateId == s.Id)
-                             .Select(f => new CandidateFileDto
-                             {
-                                 VoteCandidateId = f.VoteCandidateId,
-                                 FileName = f.FileName,
-                                 FilePath = f.FilePath
-                             }).ToList()
-            }).ToList();
-
+            var result = items
+                .OrderBy(item =>
+                    item.Note.Contains("Ban Lãnh đạo") ? 1 :
+                    item.Note.Contains("Ban Đại học số") ? 2 :
+                    item.Note.StartsWith("Phòng") ? 3 :
+                    4) // Giá trị mặc định cho các trường hợp khác
+                .ThenByDescending(item => item.Department)
+                .Select(s => new VoteCandidateDto
+                {
+                    Id = s.Id,
+                    FullName = s.FullName,
+                    Department = s.Department,
+                    Note = s.Note,
+                    Files = files.Where(f => f.VoteCandidateId == s.Id)
+                                 .Select(f => new CandidateFileDto
+                                 {
+                                     VoteCandidateId = f.VoteCandidateId,
+                                     FileName = f.FileName,
+                                     FilePath = f.FilePath
+                                 }).ToList()
+                }).ToList();
             return result;
         }
 
@@ -113,6 +130,8 @@ namespace CMCUVote.Services.VoteCandidates
             var voted = await _voteInfoRepository.FirstOrDefaultAsync(w => w.UserId == userId && w.VoteCandidateId == candidateId && w.Type == type);
             var votedByType = await _voteInfoRepository.FirstOrDefaultAsync(w => w.UserId == userId && w.Type == type);
             var countVoted = await _voteInfoRepository.GetListAsync(w => w.UserId == userId);
+            var voteByUser = await _voteInfoRepository.GetListAsync(w => w.UserId == userId && w.VoteCandidateId == candidateId);
+            if (voteByUser.Count >= 1 ) return 1; // Hết lượt vote cho ứng viên đó.
             if (countVoted.Count >= 5) return 2; // Hết lượt vote.
             if (votedByType != null) return 3; // Đã vote cho tiêu chí đó rồi.
             if (voted != null) return 1; // Đã vote cho ứng viên rồi.
